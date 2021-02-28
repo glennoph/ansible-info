@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+  - name: ensure chrony (time sync) is installed
+    yum:
+      name: chrony
+      state: present
+
+  - name: ensure chrony is running
+    service:
+      name: chronyd
+      state: started
+      enabled: yes
+
+      

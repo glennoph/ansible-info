@@ -1,0 +1,41 @@
+* Ansible Notes
+
+** Install Ansible
+there was an issue with installing with apt. The message was:
+  import ansible not found 
+Resolved by installing ansible with Virtual Environments (see ansible documentation)
+*** install virtualenv/pip
+  $ python -m virtualenv ansible  # Create a virtualenv if one does not already exist
+  $ source ansible/bin/activate   # Activate the virtual environment
+  $ python -m pip install ansible
+
+*** check version
+
+ansible -version
+
+- ansible 2.10.6 ...
+
+** inventory
+specify the group [control] and the hosts control
+also connection is local
+#+NAME; dev.ini
+#+BEGIN
+[control]
+control ansible_connection=local
+#+END
+
+** ansible config
+specify the inventory file (dev.ini)
+#+NAME; ansible.cfg
+#+BEGIN
+[defaults]
+inventory = ./dev.ini
+#+END
+
+** Commands
+- ansible --list-hosts all :: lists all the hosts in inventory
+- ansible --list-hosts control :: lists the control group hosts
+- ansible control -m ping :: ping the control group
+- ansible control -a "free -h" :: execute free -h adhoc command on control group
+  
+
